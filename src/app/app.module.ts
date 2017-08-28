@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-git addimport { BootstrapModalModule } from 'ng2-bootstrap-modal';
+import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 
 import { AppComponent } from './app.component';
 import { BucketListComponent } from './bucket-list/bucket-list.component';
