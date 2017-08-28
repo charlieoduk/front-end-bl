@@ -1,0 +1,76 @@
+<app-nav></app-nav>
+<div class="container">
+  <div class="col-lg-3 col-md-3 panel panel-default">
+    <div class="panel-body">
+      <div class="media">
+        <div align="center">
+          <img class="thumbnail img-responsive" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="300px" height="300px">
+        </div>
+        <div class="media-body">
+          <hr>
+          <h3><strong>Name</strong></h3>
+          <hr>
+          <h3><strong>Current Location</strong></h3>
+          <p>Earth</p>
+          <hr>
+          <h3><strong>Gender</strong></h3>
+          <p>Unknown</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+    <ul class="nav nav-tabs nav-justified">
+        <li class="active"><a data-toggle="pill" href="#bucketlists">Bucketlists</a></li>
+        <li><a data-toggle="pill" href="#menu1">Create A New Bucketlist</a></li>
+    </ul>
+  </div>
+  <div class="tab-content">
+    <div id='bucketlists' class="tab-pane fade in active">
+        <div *ngFor="let bucketlist of bucketlists">
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <span>
+                            <h1 class="panel-title pull-left" style="font-size:30px;">
+                                <small><strong>{{ bucketlist.name }}</strong></small> 
+                              <i class="fa fa-bucket text-success" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="John Doe is sharing with you">
+                              </i>
+                            </h1>
+                            <div class="pull-right">
+                                <h4><small>date created</small> – <small><small><i><i class="fa fa-clock-o" aria-hidden="true"></i> {{bucketlist.date_created}} </i></small></small></h4>
+                            </div>
+                        </span>
+                        <br><br>                   
+                        <br><br>
+                        <hr>
+                        <span class="pull-left">
+                          <a [routerLink]="['/bucketlists', bucketlist.id]" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-list" aria-hidden="true"></i> Items <span class="badge">{{bucketlist.items.length}}</span></a>
+                          <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-check-square" aria-hidden="true"></i> Achieved <span class="badge">{{ bucketlist.count }}</span></a>
+                        </span>
+                        <span class="pull-right">
+                          <button type="submit" class="btn btn-danger" (click)=delete(bucketlist.id)>
+                            <i class="fa fa-trash" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Mention"></i>
+                          </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+          </div>
+    </div>
+      <div style="padding-top: 15%" class="container tab-pane fade" id="menu1">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" >
+            <form method="post">
+                <div class="form-group">
+                      <label for="validate-text">Add Bucketlist</label>
+                  <div class="input-group">
+                    <input type="text" class="form-control" name="validate-text" id="validate-text" placeholder="Validate Text" required>
+                    <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
+                  </div>
+                </div>
+            </form>
+          </div>
+      </div>
+  </div>
+</div>
+
