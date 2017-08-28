@@ -1,0 +1,50 @@
+<app-nav></app-nav>
+<section *ngIf="bucketlist">
+  <div class="container">
+      <h2>{{ bucketlist.name }} Bucket list items </h2>
+      <div style="padding-top: 5%;"class="form col-md-4 col-lg-4 col-sm-12">
+        <form #itemForm="ngForm" (ngSubmit)="addItem()" >
+          <div class="input-group">
+            <input [(ngModel)]="model.name" type="text" class="form-control" name="name" id="name" required>
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" [disabled]="!itemForm.form.valid">
+                <span class="glyphicon glyphicon-plus"></span> Add Item
+              </button>
+            </span>
+          </div>
+        </form>
+        </div>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Date Created</th>
+              <th>Date Modified</th>
+              <th>Status</th>
+              <th>Check</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of bucketlist.items">
+              <td>{{ item.name }}</td>
+              <td>{{ item.date_created }}</td>
+              <td>{{ item.date_modified }}</td>
+              <td>{{ item.done }}</td>
+              <td>
+                <input id="checkbox5" type="checkbox" checked="">
+                <label for="checkbox5"></label>
+              </td>
+              <td>
+                <button type="submit" class="btn btn-danger" (click)=deleteItem(bucketlist.id,item.id)>
+                  <i class="fa fa-trash" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Mention"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      <button class="btn btn-default"  (click)="gotoBucketLists()"> Back to bucket lists </button>
+  </div>
+</section>
+
+ 
