@@ -2,6 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { BucketListComponent } from './bucket-list/bucket-list.component';
 import { BucketListDetailsComponent } from './bucket-list-details/bucket-list-details.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth.guard';
 
@@ -28,6 +29,10 @@ const routes: Routes = [
     {
         path: 'login',
         component: LoginComponent
+    },
+    {
+      path: 'register',
+      component: RegisterComponent
     },
     // map '/' to '/persons' as our default route
     {

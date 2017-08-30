@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
+import { InlineEditDirective } from 'angular2-inline-edit';
 
 import { AppComponent } from './app.component';
 import { BucketListComponent } from './bucket-list/bucket-list.component';
@@ -21,6 +22,7 @@ import { AuthenticationService } from './authentication.service';
 import { UserService } from './user.service';
 import { HomeComponent } from './home/home.component';
 import { ConfirmComponent } from './confirm/confirm.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -33,13 +35,15 @@ import { ConfirmComponent } from './confirm/confirm.component';
     AlertComponent,
     HomeComponent,
     ConfirmComponent,
+    InlineEditDirective,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
     appRouterModule,
     FormsModule,
     HttpModule,
-    BootstrapModalModule
+    BootstrapModalModule,
   ],
   providers: [
     BucketlistsService,

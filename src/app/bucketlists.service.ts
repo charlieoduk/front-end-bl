@@ -21,6 +21,13 @@ export class BucketlistsService {
       .map(mapBucketlists).catch(handleError);
       return bucketlists;
   }
+  search(searchTerm: string): Observable<Bucketlist[]> {
+    const options = new RequestOptions({ headers: this.getHeaders() });
+    let bucketlists = this.http
+      .get(`${this.baseUrl}/bucketlists?q=${searchTerm}/`, options)
+      .map(mapBucketlists).catch(handleError);
+      return bucketlists;
+  }
   private getHeaders(): Headers {
     // I included these headers because otherwise FireFox
     // will request text/html instead of application/json
@@ -29,7 +36,6 @@ export class BucketlistsService {
       'Authorization': currentUser.token,
       'Accept': 'application/json'
      });
-    // headers.append('Accept', 'application/json');
     return headers;
   }
   // Get bucketlist by ID
@@ -41,12 +47,9 @@ export class BucketlistsService {
   }
   // Add a new bucketlist
 
-  addBucketlist(body: object): Observable<Bucketlist[]> {
-    // let bodyString = JSON.stringify(body);
-    return this.http.post(`${this.baseUrl}/bucketlists/`, {
-      headers: this.getHeaders(),
-      body: body
-     }) // ...using post request
+  addBucketlist(body: string): Observable<Bucketlist[]> {
+    const options = new RequestOptions({ headers: this.getHeaders() });
+    return this.http.post(`${this.baseUrl}/bucketlists/`, body, options) // ...using post request
     .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
     .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 
@@ -55,6 +58,13 @@ export class BucketlistsService {
   addBucketlistItem(body: string, id: number): Observable<Bucketlist[]> {
     const options = new RequestOptions({ headers: this.getHeaders() });
     return this.http.post(`${this.baseUrl}/bucketlists/${id}/items/`, body, options)
+    .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
+    .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+  // Change bucket list item status
+  changeStatus(body: string, id: number, itemid: number) {
+    const options = new RequestOptions({ headers: this.getHeaders() });
+    return this.http.put(`${this.baseUrl}/bucketlists/${id}/items/${itemid}/`, body, options)
     .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
     .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
@@ -69,6 +79,8 @@ export class BucketlistsService {
     .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
+
+
   // Delete a bucketlist
   deleteBucketlist(id: number): Observable<Bucketlist[]> {
     const options = new RequestOptions({ headers: this.getHeaders() });
@@ -82,9 +94,8 @@ export class BucketlistsService {
 
   // Delete a bucketlist item
   deleteBucketlistItem(id: number, itemid: number): Observable<Bucketlist[]> {
-    return this.http.delete(`${this.baseUrl}/bucketlists/${id}/items/${itemid}/`, {
-      headers: this.getHeaders()
-    })
+    const options = new RequestOptions({ headers: this.getHeaders() });
+    return this.http.delete(`${this.baseUrl}/bucketlists/${id}/items/${itemid}/`, options)
     .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
     .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 

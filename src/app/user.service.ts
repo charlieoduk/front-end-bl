@@ -5,20 +5,12 @@ import { User } from './user';
 
 @Injectable()
 export class UserService {
+  private baseUrl: string = 'https://bucketlist-api-app.herokuapp.com/api/v1.0';
 
   constructor(private http: Http) { }
 
-  create(user: User) {
-    return this.http.post('/api/users', user, this.jwt()).map((response: Response) => response.json());
+  create(body: string) {
+    return this.http.post(`${this.baseUrl}/auth/register/`, body)
+    .map((response: Response) => response.json());
   }
-
-  private jwt() {
-    // create authorization header with jwt token
-    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (currentUser && currentUser.token) {
-        let headers = new Headers({ 'Authorization': currentUser.token });
-        return new RequestOptions({ headers: headers });
-    }
-  }
-
 }
