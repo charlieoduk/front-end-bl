@@ -13,11 +13,19 @@
   
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <form class="navbar-form navbar-left" #searchForm="ngForm" (ngSubmit)="performSearch()">
+          <div class="form-group">
+            <input [(ngModel)]="model.search" type="text" class="form-control" name="search" id="search" required>
+          </div>
+          <button class="btn btn-default" type="submit" [disabled]="!searchForm.form.valid">
+            Submit
+          </button>
+        </form>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#">About</a></li>
           <li><a href="#">Contact</a></li>
           <li class="nav-item">
-              <a class="nav-link" href=#><i class="fa fa-power-off" aria-hidden="true"></i> Logout</a>
+              <a class="nav-link" href="#" (click)="logoutClicked($event)"><i class="fa fa-power-off" aria-hidden="true"></i> Logout</a>
           </li>
         </ul>
       </div><!-- /.navbar-collapse -->
