@@ -60,14 +60,15 @@
     </div>
       <div style="padding-top: 15%" class="container tab-pane fade" id="menu1">
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" >
-            <form method="post">
-                <div class="form-group">
-                      <label for="validate-text">Add Bucketlist</label>
-                  <div class="input-group">
-                    <input type="text" class="form-control" name="validate-text" id="validate-text" placeholder="Validate Text" required>
-                    <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
-                  </div>
-                </div>
+            <form #bucketlistForm="ngForm" (ngSubmit)="addBucketlist()" >
+              <div class="input-group">
+                <input [(ngModel)]="model.name" type="text" class="form-control" name="name" id="name" required>
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="submit" [disabled]="!bucketlistForm.form.valid">
+                    <span class="glyphicon glyphicon-plus"></span> Add Bucket List
+                  </button>
+                </span>
+              </div>
             </form>
           </div>
       </div>

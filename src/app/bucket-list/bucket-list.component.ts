@@ -4,6 +4,7 @@ import { BucketlistsService } from '../bucketlists.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmComponent } from '../confirm/confirm.component';
 import { DialogService } from 'ng2-bootstrap-modal';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-bucket-list',
@@ -14,6 +15,7 @@ export class BucketListComponent implements OnInit {
   @Input()bucketlists: Bucketlist[];
   errorMessage: string = '';
   isLoading: boolean = true;
+  model: any = {};
 
   constructor(private bucketlistsService: BucketlistsService,
     private route: ActivatedRoute,
@@ -25,6 +27,14 @@ export class BucketListComponent implements OnInit {
     this.bucketlistsService.getAll().subscribe((data) => {
       this.bucketlists = data;
     });
+  }
+  addBucketlist() {
+    const body = JSON.stringify(this.model);
+    this.bucketlistsService
+    .addBucketlist(body)
+    .subscribe(response => this.bucketlistsService.getAll().subscribe((data) => {
+      this.bucketlists = data;
+    }));
   }
   delete(id: string) {
     let disposable = this.dialogService.addDialog(ConfirmComponent, {
