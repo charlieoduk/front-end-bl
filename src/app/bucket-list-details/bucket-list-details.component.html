@@ -32,7 +32,7 @@
               <td>{{ item.date_modified }}</td>
               <td>{{ item.done }}</td>
               <td>
-                <input id="checkbox5" type="checkbox" checked="">
+                <input type="checkbox" name="isChecked" [checked]="item.done" (change)="isChecked(item.done,bucketlist.id,item.id)">
                 <label for="checkbox5"></label>
               </td>
               <td>
